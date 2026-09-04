@@ -1,0 +1,111 @@
+/* ===============================
+   GLOBAL
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+
+/* ===============================
+   INFO CARD
+================================ */
+
+.info-card {
+    min-height: 280px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.info-card:hover {
+    transform: translateY(-4px);
+}
+
+
+/* ===============================
+   COPY BUTTON
+================================ */
+
+.copy-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 8px 12px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #6366f1;
+
+    background: rgba(99, 102, 241, 0.08);
+
+    transition: 0.2s ease;
+
+}
+
+
+.copy-btn:hover {
+
+    background: rgba(99, 102, 241, 0.16);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* ===============================
+   MOBILE OPTIMIZATION
+================================ */
+
+@media (max-width: 640px) {
+
+    .info-card {
+        min-height: auto;
+    }
+
+}
+
+
+/* ===============================
+   LARGE SCREEN OPTIMIZATION
+================================ */
+
+@media (min-width: 1536px) {
+
+    main {
+        max-width: 1400px;
+    }
+
+}
+
+
+/* ===============================
+   4K SCREEN
+================================ */
+
+@media (min-width: 2560px) {
+
+    html {
+        font-size: 18px;
+    }
+
+    main {
+        max-width: 1900px;
+    }
+
+}
