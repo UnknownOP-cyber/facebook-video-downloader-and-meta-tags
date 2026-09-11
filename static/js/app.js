@@ -1,50 +1,93 @@
-const facebookUrl = document.getElementById("facebookUrl");
+const facebookUrl =
+    document.getElementById("facebookUrl");
 
-const fetchButton = document.getElementById("fetchButton");
+const fetchButton =
+    document.getElementById("fetchButton");
 
-const buttonText = document.getElementById("buttonText");
+const skeleton =
+    document.getElementById("skeleton");
 
-const skeleton = document.getElementById("skeleton");
+const results =
+    document.getElementById("results");
 
-const results = document.getElementById("results");
+const themeToggle =
+    document.getElementById("themeToggle");
 
-const themeToggle = document.getElementById("themeToggle");
+const themeIcon =
+    document.getElementById("themeIcon");
 
-const themeIcon = document.getElementById("themeIcon");
+const toast =
+    document.getElementById("toast");
 
-const toast = document.getElementById("toast");
+const toastMessage =
+    document.getElementById("toastMessage");
 
-const toastMessage = document.getElementById("toastMessage");
+const thumbnail =
+    document.getElementById("thumbnail");
 
-const thumbnail = document.getElementById("thumbnail");
+const videoTitle =
+    document.getElementById("videoTitle");
 
-const videoTitle = document.getElementById("videoTitle");
+const author =
+    document.getElementById("author");
 
-const author = document.getElementById("author");
+const uploadDate =
+    document.getElementById("uploadDate");
 
-const uploadDate = document.getElementById("uploadDate");
+const caption =
+    document.getElementById("caption");
 
-const caption = document.getElementById("caption");
+const description =
+    document.getElementById("description");
 
-const description = document.getElementById("description");
+const tags =
+    document.getElementById("tags");
 
-const tags = document.getElementById("tags");
+const noTags =
+    document.getElementById("noTags");
 
-const noTags = document.getElementById("noTags");
+const downloadVideoButton =
+    document.getElementById(
+        "downloadVideoButton"
+    );
+
+const qualityModal =
+    document.getElementById(
+        "qualityModal"
+    );
+
+const qualityList =
+    document.getElementById(
+        "qualityList"
+    );
+
+const closeQualityModal =
+    document.getElementById(
+        "closeQualityModal"
+    );
+
+
+/* =========================================
+   CURRENT VIDEO
+========================================= */
+
+let currentVideoUrl = "";
 
 
 
-/* ===============================
+/* =========================================
    THEME
-================================ */
+========================================= */
 
 function loadTheme() {
 
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme =
+        localStorage.getItem("theme");
 
     if (savedTheme === "dark") {
 
-        document.documentElement.classList.add("dark");
+        document.documentElement
+            .classList.add("dark");
 
     }
 
@@ -54,33 +97,44 @@ function loadTheme() {
 function updateThemeIcon() {
 
     const isDark =
-        document.documentElement.classList.contains("dark");
+        document.documentElement
+            .classList.contains("dark");
+
 
     themeIcon.setAttribute(
         "data-lucide",
         isDark ? "sun" : "moon"
     );
 
+
     lucide.createIcons();
 
 }
 
 
-themeToggle.addEventListener("click", () => {
+themeToggle.addEventListener(
+    "click",
+    () => {
 
-    document.documentElement.classList.toggle("dark");
+        document.documentElement
+            .classList.toggle("dark");
 
-    const isDark =
-        document.documentElement.classList.contains("dark");
 
-    localStorage.setItem(
-        "theme",
-        isDark ? "dark" : "light"
-    );
+        const isDark =
+            document.documentElement
+                .classList.contains("dark");
 
-    updateThemeIcon();
 
-});
+        localStorage.setItem(
+            "theme",
+            isDark ? "dark" : "light"
+        );
+
+
+        updateThemeIcon();
+
+    }
+);
 
 
 loadTheme();
@@ -91,13 +145,18 @@ updateThemeIcon();
 
 
 
-/* ===============================
+/* =========================================
    TOAST
-================================ */
+========================================= */
 
-function showToast(message, type = "success") {
+function showToast(
+    message,
+    type = "success"
+) {
 
-    toastMessage.textContent = message;
+    toastMessage.textContent =
+        message;
+
 
     toast.classList.remove(
         "translate-y-32",
@@ -107,12 +166,16 @@ function showToast(message, type = "success") {
 
     if (type === "error") {
 
-        toast.classList.add("bg-red-600");
+        toast.classList.add(
+            "bg-red-600"
+        );
 
     }
     else {
 
-        toast.classList.remove("bg-red-600");
+        toast.classList.remove(
+            "bg-red-600"
+        );
 
     }
 
@@ -130,25 +193,25 @@ function showToast(message, type = "success") {
 
 
 
-/* ===============================
-   LOADING STATE
-================================ */
+/* =========================================
+   LOADING
+========================================= */
 
 function setLoading(isLoading) {
 
-    fetchButton.disabled = isLoading;
+    fetchButton.disabled =
+        isLoading;
 
 
     if (isLoading) {
 
-        buttonText.textContent = "Fetching...";
-
-
         fetchButton.innerHTML = `
+
             <svg
                 class="animate-spin w-5 h-5"
                 viewBox="0 0 24 24"
             >
+
                 <circle
                     class="opacity-25"
                     cx="12"
@@ -170,28 +233,42 @@ function setLoading(isLoading) {
 
             </svg>
 
-            <span>Fetching...</span>
+            <span>
+                Fetching...
+            </span>
+
         `;
 
 
-        skeleton.classList.remove("hidden");
+        skeleton.classList.remove(
+            "hidden"
+        );
 
-        results.classList.add("hidden");
-
+        results.classList.add(
+            "hidden"
+        );
 
     }
     else {
 
         fetchButton.innerHTML = `
+
             <i
                 data-lucide="search"
                 class="w-5 h-5"
             ></i>
 
-            <span>Fetch Info</span>
+            <span>
+                Fetch Info
+            </span>
+
         `;
 
-        skeleton.classList.add("hidden");
+
+        skeleton.classList.add(
+            "hidden"
+        );
+
 
         lucide.createIcons();
 
@@ -201,11 +278,13 @@ function setLoading(isLoading) {
 
 
 
-/* ===============================
-   DATE FORMAT
-================================ */
+/* =========================================
+   DATE
+========================================= */
 
-function formatDate(dateString) {
+function formatDate(
+    dateString
+) {
 
     if (!dateString) {
 
@@ -216,11 +295,23 @@ function formatDate(dateString) {
 
     if (dateString.length === 8) {
 
-        const year = dateString.substring(0, 4);
+        const year =
+            dateString.substring(
+                0,
+                4
+            );
 
-        const month = dateString.substring(4, 6);
+        const month =
+            dateString.substring(
+                4,
+                6
+            );
 
-        const day = dateString.substring(6, 8);
+        const day =
+            dateString.substring(
+                6,
+                8
+            );
 
 
         const date = new Date(
@@ -246,26 +337,35 @@ function formatDate(dateString) {
 
 
 
-/* ===============================
+/* =========================================
    DISPLAY RESULTS
-================================ */
+========================================= */
 
 function displayResults(data) {
 
+    currentVideoUrl =
+        data.original_url;
+
+
     videoTitle.textContent =
-        data.title || "Facebook Video";
+        data.title ||
+        "Facebook Video";
 
 
     author.textContent =
-        data.author || "Unknown";
+        data.author ||
+        "Unknown";
 
 
     uploadDate.textContent =
-        formatDate(data.upload_date);
+        formatDate(
+            data.upload_date
+        );
 
 
     caption.textContent =
-        data.caption || "No caption available.";
+        data.caption ||
+        "No caption available.";
 
 
     description.textContent =
@@ -273,26 +373,26 @@ function displayResults(data) {
         "No description available.";
 
 
-    /* Thumbnail */
-
     if (data.thumbnail) {
 
-        thumbnail.src = data.thumbnail;
+        thumbnail.src =
+            data.thumbnail;
 
-        thumbnail.style.display = "block";
+        thumbnail.style.display =
+            "block";
 
     }
     else {
 
-        thumbnail.removeAttribute("src");
+        thumbnail.removeAttribute(
+            "src"
+        );
 
-        thumbnail.style.display = "none";
+        thumbnail.style.display =
+            "none";
 
     }
 
-
-
-    /* Tags */
 
     tags.innerHTML = "";
 
@@ -302,16 +402,21 @@ function displayResults(data) {
         data.tags.length > 0
     ) {
 
-        noTags.classList.add("hidden");
+        noTags.classList.add(
+            "hidden"
+        );
 
 
         data.tags.forEach(tag => {
 
             const tagElement =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
 
 
-            tagElement.textContent = tag;
+            tagElement.textContent =
+                tag;
 
 
             tagElement.className = `
@@ -327,20 +432,28 @@ function displayResults(data) {
             `;
 
 
-            tags.appendChild(tagElement);
+            tags.appendChild(
+                tagElement
+            );
 
         });
 
     }
     else {
 
-        noTags.classList.remove("hidden");
+        noTags.classList.remove(
+            "hidden"
+        );
 
     }
 
 
-    results.classList.remove("hidden");
+    results.classList.remove(
+        "hidden"
+    );
 
+
+    lucide.createIcons();
 
 
     setTimeout(() => {
@@ -352,18 +465,13 @@ function displayResults(data) {
 
     }, 100);
 
-
-
-
-    lucide.createIcons();
-
 }
 
 
 
-/* ===============================
-   FETCH VIDEO
-================================ */
+/* =========================================
+   FETCH METADATA
+========================================= */
 
 async function fetchVideoInfo() {
 
@@ -384,8 +492,12 @@ async function fetchVideoInfo() {
 
 
     if (
-        !url.includes("facebook.com") &&
-        !url.includes("fb.watch")
+        !url.includes(
+            "facebook.com"
+        ) &&
+        !url.includes(
+            "fb.watch"
+        )
     ) {
 
         showToast(
@@ -404,20 +516,23 @@ async function fetchVideoInfo() {
     try {
 
         const response =
-            await fetch("/fetch", {
+            await fetch(
+                "/fetch",
+                {
 
-                method: "POST",
+                    method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
-                    url: url
-                })
+                    body: JSON.stringify({
+                        url: url
+                    })
 
-            });
+                }
+            );
 
 
         const data =
@@ -434,13 +549,14 @@ async function fetchVideoInfo() {
         }
 
 
-        displayResults(data);
+        displayResults(
+            data
+        );
 
 
         showToast(
             "Video information fetched successfully!"
         );
-
 
     }
     catch (error) {
@@ -465,9 +581,9 @@ async function fetchVideoInfo() {
 
 
 
-/* ===============================
-   BUTTON EVENTS
-================================ */
+/* =========================================
+   FETCH BUTTON
+========================================= */
 
 fetchButton.addEventListener(
     "click",
@@ -477,9 +593,11 @@ fetchButton.addEventListener(
 
 facebookUrl.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
-        if (event.key === "Enter") {
+        if (
+            event.key === "Enter"
+        ) {
 
             fetchVideoInfo();
 
@@ -490,17 +608,543 @@ facebookUrl.addEventListener(
 
 
 
+/* =========================================
+   OPEN QUALITY MODAL
+========================================= */
 
-/* ===============================
-   COPY FUNCTIONALITY
-================================ */
+downloadVideoButton.addEventListener(
+    "click",
+    async () => {
+
+        if (!currentVideoUrl) {
+
+            showToast(
+                "Please fetch a video first.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        qualityModal.classList.remove(
+            "hidden"
+        );
+
+        qualityModal.classList.add(
+            "flex"
+        );
+
+
+        qualityList.innerHTML = `
+
+            <div
+                class="
+                    flex
+                    flex-col
+                    items-center
+                    justify-center
+                    py-10
+                    gap-4
+                "
+            >
+
+                <div
+                    class="
+                        w-8
+                        h-8
+                        border-4
+                        border-indigo-200
+                        border-t-indigo-600
+                        rounded-full
+                        animate-spin
+                    "
+                ></div>
+
+                <p
+                    class="
+                        text-sm
+                        text-slate-500
+                    "
+                >
+                    Loading qualities...
+                </p>
+
+            </div>
+
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/formats",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            url:
+                                currentVideoUrl
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Unable to load qualities."
+                );
+
+            }
+
+
+            renderQualityOptions(
+                data.formats
+            );
+
+        }
+        catch (error) {
+
+            qualityList.innerHTML = `
+
+                <div
+                    class="
+                        text-center
+                        py-8
+                    "
+                >
+
+                    <p
+                        class="
+                            text-red-500
+                            text-sm
+                        "
+                    >
+                        ${escapeHtml(
+                            error.message
+                        )}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   QUALITY OPTIONS
+========================================= */
+
+function renderQualityOptions(
+    formats
+) {
+
+    qualityList.innerHTML = "";
+
+
+    formats.forEach(
+        format => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className = `
+
+                w-full
+
+                p-4
+
+                rounded-2xl
+
+                border
+
+                border-slate-200
+
+                dark:border-slate-700
+
+                bg-slate-50
+
+                dark:bg-slate-800
+
+                hover:border-indigo-500
+
+                hover:bg-indigo-50
+
+                dark:hover:bg-indigo-500/10
+
+                transition
+
+                text-left
+
+                flex
+
+                items-center
+
+                justify-between
+
+                gap-4
+
+            `;
+
+
+            const audioText =
+                format.has_audio
+                    ? "Video + Audio"
+                    : "Video + Audio merged";
+
+
+            button.innerHTML = `
+
+                <div
+                    class="
+                        flex
+                        items-center
+                        gap-3
+                    "
+                >
+
+                    <div
+                        class="
+                            w-11
+                            h-11
+                            rounded-xl
+                            bg-indigo-100
+                            dark:bg-indigo-500/10
+                            text-indigo-600
+                            flex
+                            items-center
+                            justify-center
+                            font-bold
+                            text-xs
+                        "
+                    >
+                        ${format.height}p
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="
+                                font-semibold
+                            "
+                        >
+                            ${format.height}p
+                        </p>
+
+                        <p
+                            class="
+                                text-xs
+                                text-slate-500
+                                mt-1
+                            "
+                        >
+                            ${escapeHtml(
+                                audioText
+                            )}
+                            ·
+                            ${escapeHtml(
+                                format.ext
+                            )}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <i
+                    data-lucide="download"
+                    class="
+                        w-5
+                        h-5
+                        text-indigo-500
+                    "
+                ></i>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    downloadSelectedVideo(
+       //                 format.format_id,
+                        format.height
+                    );
+
+                }
+            );
+
+
+            qualityList.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    lucide.createIcons();
+
+}
+
+
+
+/* =========================================
+   DOWNLOAD SELECTED QUALITY
+========================================= */
+
+async function downloadSelectedVideo(
+  //  formatId,
+    height
+) {
+
+    closeModal();
+
+
+    showToast(
+        `Preparing ${height}p video...`
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/download",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        url:
+                            currentVideoUrl,
+                        height:
+                            height
+                       // format_id:
+                         //   formatId
+
+                    })
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            const data =
+                await response.json();
+
+
+            throw new Error(
+                data.error ||
+                "Download failed."
+            );
+
+        }
+
+
+        const blob =
+            await response.blob();
+
+
+        const contentDisposition =
+            response.headers.get(
+                "Content-Disposition"
+            );
+
+
+        let filename =
+            `facebook-video-${height}p.mp4`;
+
+
+        if (
+            contentDisposition
+        ) {
+
+            const match =
+                contentDisposition.match(
+                    /filename="?([^"]+)"?/i
+                );
+
+
+            if (match) {
+
+                filename =
+                    match[1];
+
+            }
+
+        }
+
+
+        const blobUrl =
+            window.URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            blobUrl;
+
+        link.download =
+            filename;
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        window.URL.revokeObjectURL(
+            blobUrl
+        );
+
+
+        showToast(
+            `${height}p video downloaded!`
+        );
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+
+        showToast(
+            error.message ||
+            "Download failed.",
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
+
+function closeModal() {
+
+    qualityModal.classList.add(
+        "hidden"
+    );
+
+    qualityModal.classList.remove(
+        "flex"
+    );
+
+}
+
+
+closeQualityModal.addEventListener(
+    "click",
+    closeModal
+);
+
+
+qualityModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            qualityModal
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+
+
+/* =========================================
+   COPY BUTTONS
+========================================= */
 
 document.addEventListener(
     "click",
-    async (event) => {
+    async event => {
 
         const button =
-            event.target.closest(".copy-btn");
+            event.target.closest(
+                ".copy-btn"
+            );
 
 
         if (!button) return;
@@ -513,7 +1157,9 @@ document.addEventListener(
         let textToCopy = "";
 
 
-        if (target === "caption") {
+        if (
+            target === "caption"
+        ) {
 
             textToCopy =
                 caption.textContent;
@@ -521,7 +1167,9 @@ document.addEventListener(
         }
 
 
-        if (target === "description") {
+        if (
+            target === "description"
+        ) {
 
             textToCopy =
                 description.textContent;
@@ -529,13 +1177,20 @@ document.addEventListener(
         }
 
 
-        if (target === "tags") {
+        if (
+            target === "tags"
+        ) {
 
             textToCopy =
                 Array.from(
-                    tags.querySelectorAll("span")
+                    tags.querySelectorAll(
+                        "span"
+                    )
                 )
-                .map(tag => tag.textContent)
+                .map(
+                    tag =>
+                        tag.textContent
+                )
                 .join(" ");
 
         }
@@ -555,12 +1210,15 @@ document.addEventListener(
 
         try {
 
-            await navigator.clipboard.writeText(
-                textToCopy
+            await navigator.clipboard
+                .writeText(
+                    textToCopy
+                );
+
+
+            showToast(
+                "Copied!"
             );
-
-
-            showToast("Copied!");
 
         }
         catch (error) {
