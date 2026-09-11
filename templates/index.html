@@ -507,33 +507,64 @@
             <!-- THUMBNAIL -->
 
             <div
-                class="
-                    rounded-3xl
-                    overflow-hidden
-                    bg-slate-200
-                    dark:bg-slate-800
-                    min-h-[220px]
-                "
-            >
+    class="
+        rounded-3xl
+        overflow-hidden
+        bg-slate-200
+        dark:bg-slate-800
+        min-h-[220px]
+        flex
+        flex-col
+    "
+>
 
-                <img
+    <div class="relative flex-1">
 
-                    id="thumbnail"
+        <img
+            id="thumbnail"
+            src=""
+            alt="Video Thumbnail"
+            class="
+                w-full
+                h-full
+                object-cover
+                min-h-[220px]
+            "
+        >
 
-                    src=""
+    </div>
 
-                    alt="Video Thumbnail"
 
-                    class="
-                        w-full
-                        h-full
-                        object-cover
-                        min-h-[220px]
-                    "
+    <button
+        id="downloadVideoButton"
+        class="
+            w-full
+            h-14
+            bg-gradient-to-r
+            from-indigo-600
+            to-purple-600
+            text-white
+            font-semibold
+            flex
+            items-center
+            justify-center
+            gap-2
+            hover:opacity-90
+            active:scale-[0.98]
+            transition
+        "
+    >
 
-                >
+        <i
+            data-lucide="download"
+            class="w-5 h-5"
+        ></i>
 
-            </div>
+        Download Video
+
+    </button>
+
+</div>
 
 
 
@@ -583,9 +614,9 @@
                 <h3
                     id="videoTitle"
                     class="
-                        text-xl
-                        sm:text-2xl
-                        md:text-3xl
+                        text-lg
+                        sm:text-xl
+                        md:text-2xl
                         font-bold
                         mb-6
                         break-words
@@ -972,7 +1003,136 @@
 
 </main>
 
+<!-- ================= QUALITY MODAL ================= -->
 
+<div
+    id="qualityModal"
+    class="
+        fixed
+        inset-0
+        z-[100]
+        hidden
+        items-center
+        justify-center
+        bg-black/60
+        backdrop-blur-sm
+        p-4
+    "
+>
+
+    <div
+        class="
+            w-full
+            max-w-md
+            max-h-[85vh]
+            overflow-hidden
+            bg-white
+            dark:bg-slate-900
+            rounded-3xl
+            shadow-2xl
+            border
+            border-slate-200
+            dark:border-slate-800
+        "
+    >
+
+        <!-- Header -->
+
+        <div
+            class="
+                p-6
+                border-b
+                border-slate-200
+                dark:border-slate-800
+                flex
+                items-center
+                justify-between
+            "
+        >
+
+            <div>
+
+                <h3 class="text-xl font-bold">
+                    Download Video
+                </h3>
+
+                <p
+                    class="
+                        text-sm
+                        text-slate-500
+                        mt-1
+                    "
+                >
+                    Select video quality
+                </p>
+
+            </div>
+
+
+            <button
+                id="closeQualityModal"
+                class="
+                    w-10
+                    h-10
+                    rounded-xl
+                    bg-slate-100
+                    dark:bg-slate-800
+                    flex
+                    items-center
+                    justify-center
+                "
+            >
+
+                <i
+                    data-lucide="x"
+                    class="w-5 h-5"
+                ></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- Quality List -->
+
+        <div
+            id="qualityList"
+            class="
+                p-5
+                space-y-3
+                overflow-y-auto
+                max-h-[60vh]
+            "
+        >
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-center
+                    py-10
+                "
+            >
+
+                <div
+                    class="
+                        w-8
+                        h-8
+                        border-4
+                        border-indigo-200
+                        border-t-indigo-600
+                        rounded-full
+                        animate-spin
+                    "
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- ================= TOAST ================= -->
 
